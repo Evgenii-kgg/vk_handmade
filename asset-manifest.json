@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/vk_handmade/static/css/main.3690c103.chunk.css",
+    "main.js": "/vk_handmade/static/js/main.5a2c4462.chunk.js",
+    "main.js.map": "/vk_handmade/static/js/main.5a2c4462.chunk.js.map",
+    "runtime-main.js": "/vk_handmade/static/js/runtime-main.45b70e27.js",
+    "runtime-main.js.map": "/vk_handmade/static/js/runtime-main.45b70e27.js.map",
+    "static/css/2.f6c82352.chunk.css": "/vk_handmade/static/css/2.f6c82352.chunk.css",
+    "static/js/2.d8eaea50.chunk.js": "/vk_handmade/static/js/2.d8eaea50.chunk.js",
+    "static/js/2.d8eaea50.chunk.js.map": "/vk_handmade/static/js/2.d8eaea50.chunk.js.map",
+    "index.html": "/vk_handmade/index.html",
+    "precache-manifest.ffa7263c1f4fa7bd1f0ca4d9c04b2886.js": "/vk_handmade/precache-manifest.ffa7263c1f4fa7bd1f0ca4d9c04b2886.js",
+    "service-worker.js": "/vk_handmade/service-worker.js",
+    "static/css/2.f6c82352.chunk.css.map": "/vk_handmade/static/css/2.f6c82352.chunk.css.map",
+    "static/css/main.3690c103.chunk.css.map": "/vk_handmade/static/css/main.3690c103.chunk.css.map",
+    "static/js/2.d8eaea50.chunk.js.LICENSE.txt": "/vk_handmade/static/js/2.d8eaea50.chunk.js.LICENSE.txt",
+    "static/media/style.css": "/vk_handmade/static/media/screen_mobile.b3ffbd3f.svg",
+    "static/media/persik.png": "/vk_handmade/static/media/persik.4e1ec840.png",
+    "static/media/search.svg": "/vk_handmade/static/media/search.2ac4e6f4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.45b70e27.js",
+    "static/css/2.f6c82352.chunk.css",
+    "static/js/2.d8eaea50.chunk.js",
+    "static/css/main.3690c103.chunk.css",
+    "static/js/main.5a2c4462.chunk.js"
+  ]
+}
