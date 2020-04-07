@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://evgeniigl.github.io/vk_handmade/",
+  "homepage": "https://Evgenii-kgg.github.io/vk_handmade/",
   "scripts": {
     "start": "cross-env PORT=10888 NODE_ENV=development react-scripts start",
     "build": "react-scripts build",
