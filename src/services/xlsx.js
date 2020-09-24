@@ -1,8 +1,10 @@
 import * as XLSX from 'xlsx';
 import axios from "axios";
+import utf8 from 'utf8'
 
-export const urlXlsxGoogle = "https://docs.google.com/spreadsheets/d/1Oikpp2P8Tp4I8s4gIJEjK4rnR4WRIoG8SMyawtCifSs/export?format=xlsx";
-// export const urlXlsxGoogleWrite = "https://docs.google.com/spreadsheets/d/1Oikpp2P8Tp4I8s4gIJEjK4rnR4WRIoG8SMyawtCifSs/";
+//export const urlXlsxGoogle = "https://docs.google.com/spreadsheets/d/1Oikpp2P8Tp4I8s4gIJEjK4rnR4WRIoG8SMyawtCifSs/export?format=xlsx";
+export const urlXlsxGoogle = "https://docs.google.com/spreadsheets/d/1Oikpp2P8Tp4I8s4gIJEjK4rnR4WRIoG8SMyawtCifSs/gviz/tq?tqx=out:csv";
+
 
 export const getXLS = () => {
     return axios.request({
@@ -13,7 +15,7 @@ export const getXLS = () => {
             Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         },
     }).then((response) => {
-
+        console.log(response)
         const data = new Uint8Array(response.data);
         const workbook = XLSX.read(data, {type: "array"});
         const typesWorksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -21,7 +23,11 @@ export const getXLS = () => {
         const types = XLSX.utils.sheet_to_json(typesWorksheet);
         const products = XLSX.utils.sheet_to_json(productsWorksheet);
 console.log(types);
-        return {types: types, products: products}
+
+const convertTypes = JSON.parse(utf8.decode(JSON.stringify(types)))
+const convertProducts = JSON.parse(utf8.decode(JSON.stringify(products)))
+        console.log(convertTypes)
+        return {types: convertTypes, products: convertProducts}
     });
 }
 
