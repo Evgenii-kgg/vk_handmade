@@ -199,7 +199,7 @@ const ListProducts = props => {
                                                                          product={product}
                                                                          count={countProducts}/>)
 
-    //console.log('countProducts-- ', products);
+    console.log('countProducts-- ', products);
     // console.log('state.filteredProducts-- ', state.filteredProducts);
     const item = slideIndex + 1;
     const currentProduct = state.filteredProducts[slideIndex];

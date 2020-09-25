@@ -5,8 +5,7 @@ import ScreenSpinner from "@vkontakte/vkui/dist/components/ScreenSpinner/ScreenS
 
 
 const Product = React.memo(props => {
-    const {product, count, item, give, buy} = props
-    console.log(props);
+    const {product} = props
     console.log(product);
 
     return (
@@ -14,7 +13,7 @@ const Product = React.memo(props => {
             {/* <div className="svg-image"></div> */}
             <div style= {{position: 'absolute', zIndex: -1}}><ScreenSpinner size='medium'/></div>
             <div className={'img-wrap'}>
-                
+
                 <img placeholder="" className="img-product" src={product.img_url || persik} alt="Persik The Cat"/>
             </div>
             {/*<div>*/}

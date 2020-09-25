@@ -16,15 +16,17 @@ export const getTypes = (products, typesXlsx) => {
     // keys.forEach((key) => {
     //     types[key] = {}
     // })
-
-    products.forEach((product) => {
+    console.log('products', products)
+    products.map((product)=> ({...product, img: String(product.img)})).forEach((product) => {
         Object.keys(product).forEach(key => {
-            if (types[key] !== undefined)
-                product[key].split(',').map(i => {
+            if (types[key] !== undefined) {
+                if(key == 'id' || key == 'active') return key
+                if (key == 'img') String(key)
+              return  product[key].split(',').map(i => {
                     const str = firstUpperCaseTrim(i)
                     if(!!str) types[key].push(str)
                 });
-        })
+        }})
 
         // types.age.push(product.age.split(',').map(age=>firstUpperCaseTrim(age)));
         //  types.event.push(product.event.split(',').map(event=>firstUpperCaseTrim(event)));
@@ -39,21 +41,29 @@ export const getTypes = (products, typesXlsx) => {
         //     if (!types.age.includes(age) && age !== '') types.age.push(age)
         // })
     })
-    types.age = [...new Set(types.age.sort())]
-    types.event = [...new Set(types.event.sort())]
-    types.active = [...new Set(types.active.sort())]
-    types.hobby = [...new Set(types.hobby.sort())]
-    types.how = [...new Set(types.how.sort())]
+
+    const filterType = (item) => {
+        return typesXlsx.flatMap((type)=>type[item]).filter((type)=>type)
+    }
+    console.log(typesXlsx[0]['age'])
+
+
+   //types.map((item, key)=> console.log(item, key))
+
+    types.age = filterType('age')
+    types.event = filterType('event')
+    types.active = filterType('active')
+    types.hobby = filterType('hobby')
+    types.how = filterType('how')
     // types.relation = [...new Set(types.relation.sort())]
-    types.sex = [...new Set(types.sex.sort())]
-    types.profession = [...new Set(types.profession.sort())]
+    types.sex = filterType('sex')
+    types.profession = filterType('profession')
     //данные "отношения" берем из первого листа чтобы поделить на М и Ж
 
     types.relation = typesXlsx.map((type) => {
         if (type.relation !== undefined)
            return  firstUpperCaseTrim(type.relation)
     }).filter((type)=>!!type)
-
 
     console.log(types);
     return types;

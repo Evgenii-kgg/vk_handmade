@@ -62,7 +62,7 @@ const initialState = {
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
-// console.log('state.products-- ',state.products);
+console.log('state.products-- ',state);
 // console.log('state.indicators-- ',state.indicators);
     // const go =  e => {
     // 	 dispatch({
@@ -116,6 +116,7 @@ const App = () => {
 
         async function fetchData() {
             const data = await getXLS();
+            console.log(data)
             const keys = Object.keys(data.types[0]);
             // let types = {};
             // keys.forEach((key) => {

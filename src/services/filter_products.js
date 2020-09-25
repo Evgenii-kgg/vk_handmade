@@ -16,8 +16,8 @@ export default class filterProducts {
         this.indicators = indicators;
         const filteredProducts = products.filter((product) => {
             const lastFilter = typeHow[this.indicators.how] === undefined ? true : this[`is${typeHow[this.indicators.how].charAt(0).toUpperCase()}${typeHow[this.indicators.how].slice(1)}`](product);
-            // console.log('product-- ', product.id, product);
-            if (!product.img || !product.img.trim() || !product.active) return false;
+            console.log('product-- ', product.id, product);
+            if (!product.img || !String(product.img ? product.img : "").trim() || !product.active) return false;
             return this.isHow(product) && this.isSex(product) && this.isAge(product) && lastFilter
         })
 
@@ -38,8 +38,8 @@ export default class filterProducts {
     }
 
     // static isActive = (product) => {
-    //     if (product.active === undefined) return true; 
-    //     return 
+    //     if (product.active === undefined) return true;
+    //     return
     // }
 
     static isHow = (product) => {
@@ -71,7 +71,7 @@ export default class filterProducts {
         // console.log('product.event-- ', product.event,event.length > 0);
         return event.length > 0;
     }
-    
+
     static isHobby = (product) => {
         // console.log('product.hobby-- ', product.hobby);
         if (product.hobby === undefined) return true;
