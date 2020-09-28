@@ -116,8 +116,9 @@ const ListProducts = props => {
             // console.log('data-- ', data);
             // console.log('filteredProducts-- ', filteredProducts);
             filteredProducts.map((product) => {
-                data.response.forEach(function (photo) {
-                    if (!!product.img && product.img.includes(photo.id)) {
+                data.response.forEach((photo)=> {
+                    console.log(photo)
+                    if (!!product.img && String(product.img).includes(photo.id)) {
                         product.img_url = photo.sizes[4].url
                     }
                 })
@@ -147,10 +148,12 @@ const ListProducts = props => {
             // console.log('prod',state.products,state.indicators,handmade_id);
 
             filteredProducts = filterProducts.filter(state.products, state.indicators);
+            console.log(filteredProducts, state.products, state.indicators)
             const photos = filteredProducts.map((product) => {
-                // console.log('proddd',product.img);
+                console.log('product',product.img);
                 if (!product.img) return '';
                 product.img_fullname = `-${handmade_id}_${String(product.img).split(',')[0].trim()}`
+                console.log(product.img_fullname)
                 return product.img_fullname
                 // ((img_id) => {
                 //     return `-${handmade_id}_${img_id.trim()}`
@@ -179,8 +182,6 @@ const ListProducts = props => {
         if (element) {
             const root = document.getElementById('root')
             const isOverflow = element.getBoundingClientRect().height > root.scrollHeight
-            // console.log('log-- ',element.getBoundingClientRect().height, root.scrollHeight );
-            // console.log('isOverflow-- ',element.getBoundingClientRect().height > root.scrollHeight);
             if (state.isOverflow !== isOverflow && state.panelOverflow !== state.activePanel) {
                 dispatch({
                     type: 'setOverflow',
@@ -193,11 +194,13 @@ const ListProducts = props => {
         }
     };
 
-
     const countProducts = state.filteredProducts.length;
-    const products = state.filteredProducts.map((product, i) => <Product key={i} item={++i}
-                                                                         product={product}
-                                                                         count={countProducts}/>)
+
+    const products = state.filteredProducts.map((product, i) =>
+        <Product key={i} item={++i}
+                 product={product}
+                 count={countProducts}
+        />)
 
     console.log('countProducts-- ', products);
     // console.log('state.filteredProducts-- ', state.filteredProducts);

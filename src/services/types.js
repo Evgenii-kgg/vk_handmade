@@ -45,10 +45,6 @@ export const getTypes = (products, typesXlsx) => {
     const filterType = (item) => {
         return typesXlsx.flatMap((type)=>type[item]).filter((type)=>type)
     }
-    console.log(typesXlsx[0]['age'])
-
-
-   //types.map((item, key)=> console.log(item, key))
 
     types.age = filterType('age')
     types.event = filterType('event')

@@ -160,7 +160,6 @@ console.log('state.products-- ',state);
         return result;
     }
 
-
  //console.log('data.types-- ', state.types);
  // console.log('data.products-- ',state.products);
  //console.log('state.ind-- ', state.indicators);
@@ -171,10 +170,6 @@ console.log('state.products-- ',state);
             <div className={state.isOverflow?"container-height-auto":"container"}>
                 <View activePanel={state.activePanel} popout={state.popout ? <ScreenSpinner size='large'/> : null}>
                     <Home id='home' fetchedUser={state.fetchedUser}/>
-                    {/*<Whom id='sex'/>*/}
-                    {/*<WhoHave id='who_have'/>*/}
-                    {/*<Age id='age'/>*/}
-                    {/*<PanelItem id={'sex'} to_id={'sex'} title={''} />*/}
                     <PanelItem id={'how'} to_id={'sex'}  back_id={'home'} title={'Как подобрать подарок?'}
                                types={state.types.how}/>
                     <PanelItem withHeader id={'sex'} back_id={'how'} to_id={'age'} title={'Кому ищем подарок?'}
