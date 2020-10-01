@@ -1,12 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react'
 import PropTypes from 'prop-types';
-import {IOS, platform} from '@vkontakte/vkui';
+import {IOS, platform, Div, Gallery, CellButton, Button} from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import './../../style.css';
-import Div from "@vkontakte/vkui/dist/components/Div/Div";
-import Gallery from "@vkontakte/vkui/dist/components/Gallery/Gallery";
-import CellButton from "@vkontakte/vkui/dist/components/CellButton/CellButton";
 import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
 import Icon24BrowserForward from '@vkontakte/icons/dist/24/browser_forward';
 import {Context} from "../../context";
@@ -15,9 +12,8 @@ import filterProducts from "../../services/filter_products";
 import httpApiVk, {handmade_id} from "../../services/httpApiVk";
 import http from '../../services/http'
 import LastItem from "./components/last_item";
-//import connect from '@vkontakte/vk-connect';
 import bridge from '@vkontakte/vk-bridge';
-import Button from "@vkontakte/vkui/dist/components/Button/Button";
+import PresentIdea from "../present";
 
 const osName = platform();
 
@@ -39,8 +35,7 @@ const ListProducts = props => {
     };
 
     const give = async (e, product) => {
-        // const productPhoto = product.name;
-        // const btn = e.currentTarget.innerText;
+        console.log(product)
         await http.post('writeHandMade', {
             'msg':
             //Пользователь ${state.fetchedUser.id}.
@@ -54,6 +49,7 @@ const ListProducts = props => {
             })
         }
     };
+
 
     const helpGive = async (e, product) => {
         http.post('writeHandMade', {
@@ -79,7 +75,6 @@ const ListProducts = props => {
     };
 
     const again = e => {
-        // console.log('again-- ');
         http.post('writeHandMade', {
             'msg':
             // Пользователь ${state.fetchedUser.id}.
@@ -102,6 +97,13 @@ const ListProducts = props => {
         window.parent.location = 'https://vk.com/siberia_handmade?w=app6887721_-176551026';
     };
 
+    // const idea = (e) => {
+    //     bridge.send("VKWebAppAllowMessagesFromGroup", {"group_id": '176551026', 'key': '12345'})
+    // };
+
+    //VKWebAppAllowMessagesFromGroupFailed ответ
+
+
     const getImgs = (err, data) => {
         if (err) {
             console.error("ERROR get images", err.message);
@@ -116,8 +118,8 @@ const ListProducts = props => {
             // console.log('data-- ', data);
             // console.log('filteredProducts-- ', filteredProducts);
             filteredProducts.map((product) => {
-                data.response.forEach((photo)=> {
-                    console.log(photo)
+                data.response.forEach((photo) => {
+                    // console.log(photo)
                     if (!!product.img && String(product.img).includes(photo.id)) {
                         product.img_url = photo.sizes[4].url
                     }
@@ -148,12 +150,12 @@ const ListProducts = props => {
             // console.log('prod',state.products,state.indicators,handmade_id);
 
             filteredProducts = filterProducts.filter(state.products, state.indicators);
-            console.log(filteredProducts, state.products, state.indicators)
+            // console.log(filteredProducts, state.products, state.indicators)
             const photos = filteredProducts.map((product) => {
-                console.log('product',product.img);
+                // console.log('product',product.img);
                 if (!product.img) return '';
                 product.img_fullname = `-${handmade_id}_${String(product.img).split(',')[0].trim()}`
-                console.log(product.img_fullname)
+                // console.log(product.img_fullname)
                 return product.img_fullname
                 // ((img_id) => {
                 //     return `-${handmade_id}_${img_id.trim()}`
@@ -213,8 +215,9 @@ const ListProducts = props => {
                 <button className={'btn-back'} onClick={go} data-to={props.back_id}>
                     {osName === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
                 </button>
-                <Div
-                    className={'header-title'}>{(!!countProducts && countProducts !== slideIndex) ? `${item} из ${countProducts}: ${title}` : "Не нашли что искали?"}</Div>
+                <Div className={'header-title'}>
+                    {(!!countProducts && countProducts !== slideIndex) ? `${item} из ${countProducts}: ${title}` : "Не нашли что искали?"}
+                </Div>
             </Div>
             <div className={'container-items'} ref={refCallback}>
                 <div className={'block-items'}>
@@ -226,15 +229,13 @@ const ListProducts = props => {
                         <div className={"slider-gallery"}>
                             <Gallery
                                 className={"gallery"}
-                                // slideWidth="98%"
                                 align="center"
-                                // style={{height: 150}}
                                 slideIndex={slideIndex}
                                 onChange={slideIndex => setSlide(slideIndex)}
                             >
                                 {products}
                                 <LastItem again={again} redirectSiberiaHandmade={redirectSiberiaHandmade}/>
-
+                                {/*<PresentIdea again={again} redirectSiberiaHandmade={redirectSiberiaHandmade} ></PresentIdea>*/}
                             </Gallery>
                         </div>
                         {!!countProducts && countProducts !== slideIndex &&

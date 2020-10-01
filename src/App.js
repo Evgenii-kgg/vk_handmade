@@ -1,17 +1,16 @@
 import React, {useEffect, useReducer} from 'react'
-import View from '@vkontakte/vkui/dist/components/View/View';
+import {View, Spinner}  from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import reducer from './reducer'
 //import connect from '@vkontakte/vk-connect';
 import bridge from '@vkontakte/vk-bridge';
 
-
 import Home from './panels/home';
 
 import {Context} from './context'
-import ScreenSpinner from "@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner";
 import {getXLS} from "./services/xlsx";
 import PanelItem from "./panels/panel";
+import PresentIdea from "./panels/present/index";
 import ListProducts from "./panels/list_products";
 import {typeHow} from "./services/filter_products";
 import {getTypes} from "./services/types";
@@ -22,6 +21,7 @@ const initialState = {
     activePanel: 'home',
     isOverflow:false,
     panelOverflow:'',
+    MessagesFromGroupResult: false,
     fetchedUser: {
         bdate: "",
         city: {id: null, title: ""},
@@ -62,19 +62,6 @@ const initialState = {
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
-console.log('state.products-- ',state);
-// console.log('state.indicators-- ',state.indicators);
-    // const go =  e => {
-    // 	 dispatch({
-    // 		type: 'setActivePanel',
-    // 		payload: {
-    // 			activePanel:e.currentTarget.dataset.to,
-    // 		}
-    // 	})
-    // };
-    //
-    // const setUser = user => {
-    // };
 
     //get user info
     useEffect(() => {
@@ -91,8 +78,11 @@ console.log('state.products-- ',state);
                 }
             }
         );
+
+
+
      async function fetchUser() {
-         const user = await bridge.sendPromise('VKWebAppGetUserInfo');
+         const user = await bridge.send('VKWebAppGetUserInfo');
             dispatch({
                 type: 'setUser',
                 payload: {
@@ -101,7 +91,6 @@ console.log('state.products-- ',state);
                 }
             })
         }
-
         fetchUser();
     }, []);
 
@@ -116,8 +105,7 @@ console.log('state.products-- ',state);
 
         async function fetchData() {
             const data = await getXLS();
-            console.log(data)
-            const keys = Object.keys(data.types[0]);
+            // const keys = Object.keys(data.types[0]);
             // let types = {};
             // keys.forEach((key) => {
             //     types[key] = {}
@@ -128,9 +116,7 @@ console.log('state.products-- ',state);
             //             types[key][type.id] = firstUpperCaseTrim(type[key])
             //     })
             // })
-            //console.log(data.types);
             const types = getTypes(data.products, data.types)
-            // console.log('types-- ', types);
             dispatch({
                 type: 'setTypes',
                 payload: {
@@ -160,15 +146,12 @@ console.log('state.products-- ',state);
         return result;
     }
 
- //console.log('data.types-- ', state.types);
- // console.log('data.products-- ',state.products);
- //console.log('state.ind-- ', state.indicators);
     return (
         <Context.Provider value={{
             state, dispatch
         }}>
             <div className={state.isOverflow?"container-height-auto":"container"}>
-                <View activePanel={state.activePanel} popout={state.popout ? <ScreenSpinner size='large'/> : null}>
+                <View activePanel={state.activePanel} popout={state.popout ? <Spinner size='large' style={{color: '#279fd8'}}/> : null}>
                     <Home id='home' fetchedUser={state.fetchedUser}/>
                     <PanelItem id={'how'} to_id={'sex'}  back_id={'home'} title={'Как подобрать подарок?'}
                                types={state.types.how}/>
@@ -186,6 +169,7 @@ console.log('state.products-- ',state);
                     <PanelItem withHeader id={'event'} back_id={'age'} to_id={'list_products'} title={'Событие?'}
                                types={state.types.event}/>
                     <ListProducts id='list_products' back_id={typeHow[state.indicators.how] || 'age'}/>
+                    <PresentIdea id={'idea'} back_id={'list_products'}  title={'Идея'}/>
                 </View>
                 <span className={'error'}>{state.error}</span>
             </div>

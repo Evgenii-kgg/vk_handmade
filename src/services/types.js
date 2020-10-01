@@ -11,12 +11,8 @@ export const getTypes = (products, typesXlsx) => {
         profession: [],
         active: [],
     };
-    //console.log('typesXlsx-- ',typesXlsx);
-    // let types = {};
-    // keys.forEach((key) => {
-    //     types[key] = {}
-    // })
-    console.log('products', products)
+
+    // console.log('products', products)
     products.map((product)=> ({...product, img: String(product.img)})).forEach((product) => {
         Object.keys(product).forEach(key => {
             if (types[key] !== undefined) {
@@ -36,10 +32,6 @@ export const getTypes = (products, typesXlsx) => {
         //  types.sex.push(product.sex.split(',').map(sex=>firstUpperCaseTrim(sex)));
         //  types.profession.push(product.profession.split(',').map(profession=>firstUpperCaseTrim(profession)));
 
-
-        // ages.forEach(age=> {
-        //     if (!types.age.includes(age) && age !== '') types.age.push(age)
-        // })
     })
 
     const filterType = (item) => {
@@ -61,7 +53,7 @@ export const getTypes = (products, typesXlsx) => {
            return  firstUpperCaseTrim(type.relation)
     }).filter((type)=>!!type)
 
-    console.log(types);
+    // console.log(types);
     return types;
 }
 

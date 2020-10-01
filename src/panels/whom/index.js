@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // import {platform} from '@vkontakte/vkui';
 import {Context} from '../../context'
 import './../../style.css';
-import Div from "@vkontakte/vkui/dist/components/Div/Div";
+import Div from "@vkontakte/vkui";
 import BtnOutline from "../../core/BtnOutline";
 
 // const osName = platform();

@@ -1,20 +1,43 @@
-import React from 'react'
-import Button from "@vkontakte/vkui/dist/components/Button/Button";
+import React, {useContext} from 'react'
+import {Button} from "@vkontakte/vkui";
 import PropTypes from 'prop-types';
 import search from './../../../img/search.svg'
 
-import Div from "@vkontakte/vkui/dist/components/Div/Div";
+import {Context} from "../../../context";
+import bridge from "@vkontakte/vk-bridge";
 
-const LastItem = props => {
-    const { again, redirectSiberiaHandmade}= props
+const LastItem = (props) => {
+
+    const {state, dispatch} = useContext(Context)
+
+    // const MessageFromGroup = ()=> {
+    //     return bridge.send('VKWebAppAllowMessagesFromGroup', {"group_id": '176551026', 'key': '12345'})
+    // };
+
+    const go = e => {
+
+        dispatch({
+            type: 'setActivePanel',
+            payload: {
+                activePanel: 'idea',
+            }
+        })
+    };
+
+    const {again, redirectSiberiaHandmade, idea} = props
     return (
         <div className="product">
             <div className="lastProduct">
-<img src={search} className={'img-search'} /* width={150} height={200} *//>
-            <div>
-                <Button size='l' level="outline" className="btn-white" onClick={again}>Попробовать еще раз!</Button>< br /> 
-                <Button size='l' level="outline" className="btn-white" onClick={redirectSiberiaHandmade}>Подберите мне подарок!</Button>
-            </div>
+                <img src={search} className={'img-search'} /* width={150} height={200} *//>
+                <div>
+                    <Button size='l' level="outline" className="btn-white" onClick={again}>Попробовать еще раз!</Button>< br/>
+                    <Button size='l' level="outline" className="btn-white" onClick={redirectSiberiaHandmade}>
+                        Подберите мне подарок!
+                    </Button>
+                    <Button size='l' mode="secondary"  onClick={go} data_to={'idea_page'}>
+                        Предложить свою идею
+                    </Button>
+                </div>
             </div>
         </div>
     )
