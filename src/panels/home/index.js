@@ -10,7 +10,7 @@ const Home = (props) => {
 
     const {dispatch} = useContext(Context);
 
-    const go = e => {
+    const go = (e) => {
 
         dispatch({
             type: 'setActivePanel',

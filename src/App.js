@@ -1,5 +1,5 @@
 import React, {useEffect, useReducer} from 'react'
-import {View, Spinner}  from '@vkontakte/vkui';
+import {View, Spinner} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import reducer from './reducer'
 //import connect from '@vkontakte/vk-connect';
@@ -14,14 +14,13 @@ import PresentIdea from "./panels/present/index";
 import ListProducts from "./panels/list_products";
 import {typeHow} from "./services/filter_products";
 import {getTypes} from "./services/types";
-import { checkPropTypes } from 'prop-types';
+// import { checkPropTypes } from 'prop-types';
 //import {bounce} from '../../../node_modules/animate.css/animate.css';
 
 const initialState = {
     activePanel: 'home',
-    isOverflow:false,
-    panelOverflow:'',
-    MessagesFromGroupResult: false,
+    isOverflow: false,
+    panelOverflow: '',
     fetchedUser: {
         bdate: "",
         city: {id: null, title: ""},
@@ -37,7 +36,7 @@ const initialState = {
     },
     popout: false,
     error: '',
-    log:'',
+    log: '',
     types: {
         how: [],
         sex: [],
@@ -63,6 +62,17 @@ const initialState = {
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    async function fetchUser() {
+        const user = await bridge.send('VKWebAppGetUserInfo');
+        dispatch({
+            type: 'setUser',
+            payload: {
+                fetchedUser: user,
+                popout: false,
+            }
+        })
+    };
+
     //get user info
     useEffect(() => {
         dispatch({
@@ -73,24 +83,11 @@ const App = () => {
         })
         bridge.subscribe(({detail: {type, data}}) => {
                 if (type === 'VKWebAppUpdateConfig') {
-                    const schemeAttribute = document.createAttribute('scheme');
+                    // const schemeAttribute = document.createAttribute('scheme');
                     // console.log('schemeAttribute-- ', schemeAttribute);
                 }
             }
         );
-
-
-
-     async function fetchUser() {
-         const user = await bridge.send('VKWebAppGetUserInfo');
-            dispatch({
-                type: 'setUser',
-                payload: {
-                    fetchedUser: user,
-                    popout: false,
-                }
-            })
-        }
         fetchUser();
     }, []);
 
@@ -105,17 +102,7 @@ const App = () => {
 
         async function fetchData() {
             const data = await getXLS();
-            // const keys = Object.keys(data.types[0]);
-            // let types = {};
-            // keys.forEach((key) => {
-            //     types[key] = {}
-            // })
-            // data.types.forEach((type) => {
-            //     keys.forEach((key) => {
-            //         if (type[key] !== undefined)
-            //             types[key][type.id] = firstUpperCaseTrim(type[key])
-            //     })
-            // })
+
             const types = getTypes(data.products, data.types)
             dispatch({
                 type: 'setTypes',
@@ -150,10 +137,11 @@ const App = () => {
         <Context.Provider value={{
             state, dispatch
         }}>
-            <div className={state.isOverflow?"container-height-auto":"container"}>
-                <View activePanel={state.activePanel} popout={state.popout ? <Spinner size='large' style={{color: '#279fd8'}}/> : null}>
+            <div className={state.isOverflow ? "container-height-auto" : "container"}>
+                <View activePanel={state.activePanel}
+                      popout={state.popout ? <Spinner size='large' style={{color: '#279fd8'}}/> : null}>
                     <Home id='home' fetchedUser={state.fetchedUser}/>
-                    <PanelItem id={'how'} to_id={'sex'}  back_id={'home'} title={'Как подобрать подарок?'}
+                    <PanelItem id={'how'} to_id={'sex'} back_id={'home'} title={'Как подобрать подарок?'}
                                types={state.types.how}/>
                     <PanelItem withHeader id={'sex'} back_id={'how'} to_id={'age'} title={'Кому ищем подарок?'}
                                types={state.types.sex}/>
@@ -162,14 +150,15 @@ const App = () => {
                                types={state.types.age}/>
                     <PanelItem withHeader id={'profession'} back_id={'age'} to_id={'list_products'} title={'Профессия?'}
                                types={state.types.profession}/>
-                    <PanelItem withHeader id={'relation'} back_id={'age'} to_id={'list_products'} title={'Кем приходится?'}
+                    <PanelItem withHeader id={'relation'} back_id={'age'} to_id={'list_products'}
+                               title={'Кем приходится?'}
                                types={getRelationsAtSex()}/>
                     <PanelItem withHeader id={'hobby'} back_id={'age'} to_id={'list_products'} title={'Увлечение?'}
                                types={state.types.hobby}/>
                     <PanelItem withHeader id={'event'} back_id={'age'} to_id={'list_products'} title={'Событие?'}
                                types={state.types.event}/>
                     <ListProducts id='list_products' back_id={typeHow[state.indicators.how] || 'age'}/>
-                    <PresentIdea id={'idea'} back_id={'list_products'}  title={'Идея'}/>
+                    <PresentIdea id={'idea'} back_id={'list_products'} fetchedUser={state.fetchedUser} title={'Идея'}/>
                 </View>
                 <span className={'error'}>{state.error}</span>
             </div>

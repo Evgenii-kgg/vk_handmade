@@ -13,7 +13,6 @@ import httpApiVk, {handmade_id} from "../../services/httpApiVk";
 import http from '../../services/http'
 import LastItem from "./components/last_item";
 import bridge from '@vkontakte/vk-bridge';
-import PresentIdea from "../present";
 
 const osName = platform();
 
@@ -35,7 +34,7 @@ const ListProducts = props => {
     };
 
     const give = async (e, product) => {
-        console.log(product)
+        // console.log(product)
         await http.post('writeHandMade', {
             'msg':
             //Пользователь ${state.fetchedUser.id}.
@@ -97,12 +96,6 @@ const ListProducts = props => {
         window.parent.location = 'https://vk.com/siberia_handmade?w=app6887721_-176551026';
     };
 
-    // const idea = (e) => {
-    //     bridge.send("VKWebAppAllowMessagesFromGroup", {"group_id": '176551026', 'key': '12345'})
-    // };
-
-    //VKWebAppAllowMessagesFromGroupFailed ответ
-
 
     const getImgs = (err, data) => {
         if (err) {
@@ -152,20 +145,14 @@ const ListProducts = props => {
             filteredProducts = filterProducts.filter(state.products, state.indicators);
             // console.log(filteredProducts, state.products, state.indicators)
             const photos = filteredProducts.map((product) => {
-                // console.log('product',product.img);
                 if (!product.img) return '';
                 product.img_fullname = `-${handmade_id}_${String(product.img).split(',')[0].trim()}`
-                // console.log(product.img_fullname)
                 return product.img_fullname
-                // ((img_id) => {
-                //     return `-${handmade_id}_${img_id.trim()}`
-                // }).join(',')
             }).filter(img => !!img).join(',')
             // console.log('photos-- ', photos);
             if (!!photos) {
                 httpApiVk.jsonp(uriImg, {photos: photos}, getImgs)
             } else {
-                //console.log(dispatch);
                 dispatch({
                     type: 'getFilteredProducts',
                     payload: {
@@ -204,8 +191,7 @@ const ListProducts = props => {
                  count={countProducts}
         />)
 
-    console.log('countProducts-- ', products);
-    // console.log('state.filteredProducts-- ', state.filteredProducts);
+    // console.log('countProducts-- ', products);
     const item = slideIndex + 1;
     const currentProduct = state.filteredProducts[slideIndex];
     const title = currentProduct && currentProduct.name;
@@ -235,7 +221,6 @@ const ListProducts = props => {
                             >
                                 {products}
                                 <LastItem again={again} redirectSiberiaHandmade={redirectSiberiaHandmade}/>
-                                {/*<PresentIdea again={again} redirectSiberiaHandmade={redirectSiberiaHandmade} ></PresentIdea>*/}
                             </Gallery>
                         </div>
                         {!!countProducts && countProducts !== slideIndex &&

@@ -16,8 +16,8 @@ export const getTypes = (products, typesXlsx) => {
     products.map((product)=> ({...product, img: String(product.img)})).forEach((product) => {
         Object.keys(product).forEach(key => {
             if (types[key] !== undefined) {
-                if(key == 'id' || key == 'active') return key
-                if (key == 'img') String(key)
+                if(key === 'id' || key === 'active') return key
+                if (key === 'img') String(key)
               return  product[key].split(',').map(i => {
                     const str = firstUpperCaseTrim(i)
                     if(!!str) types[key].push(str)

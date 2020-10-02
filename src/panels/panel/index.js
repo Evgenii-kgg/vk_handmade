@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
-import PropTypes, {object} from 'prop-types';
-import {Div, IOS, platform, Button} from '@vkontakte/vkui';
+import PropTypes from 'prop-types';
+import {Div, IOS, platform} from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import './../../style.css';
@@ -15,7 +15,7 @@ const PanelItem = props => {
     const {state, dispatch} = useContext(Context)
 
     const setIndicators = (e, data) => {
-        console.log(data)
+        // console.log(data)
         dispatch({
             type: 'setIndicators',
             payload: {
@@ -71,7 +71,6 @@ const PanelItem = props => {
 
     })
 
-
     const buttons = types.map((val) =>
         <BtnOutline
             key={val}
@@ -80,22 +79,6 @@ const PanelItem = props => {
             active={state.indicators[props.id] === val}>
             {val}
         </BtnOutline>)
-
-    const refCallback = element => {
-        if (element) {
-            const root = document.getElementById('root')
-            const isOverflow = element.getBoundingClientRect().bottom + 20 > root.scrollHeight
-            if (state.isOverflow !== isOverflow && state.panelOverflow !== state.activePanel) {
-                dispatch({
-                    type: 'setOverflow',
-                    payload: {
-                        isOverflow: isOverflow,
-                        panelOverflow: state.activePanel
-                    }
-                })
-            }
-        }
-    };
 
     return <div className={'wrapper'} id={props.id}>
         <div className={'panel'}>

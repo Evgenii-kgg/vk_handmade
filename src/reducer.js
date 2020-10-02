@@ -17,16 +17,6 @@ export default (state, action) => {
                 popout: action.payload.popout,
                 error: action.payload.error
             }
-
-        case "message":
-            http.post('writeHandMade', {'msg':
-                // Пользователь ${action.payload.fetchedUser.id}
-                    `Разрешил сообщения.`})
-            return {
-                ...state,
-                MessagesFromGroupResult: action.payload.MessagesFromGroupResult,
-                popout: action.payload.popout
-            }
         case "setUser":
             http.post('writeHandMade', {'msg':
             // Пользователь ${action.payload.fetchedUser.id}

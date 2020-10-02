@@ -4,17 +4,13 @@ import PropTypes from 'prop-types';
 import search from './../../../img/search.svg'
 
 import {Context} from "../../../context";
-import bridge from "@vkontakte/vk-bridge";
+// import bridge from "@vkontakte/vk-bridge";
 
 const LastItem = (props) => {
 
-    const {state, dispatch} = useContext(Context)
+    const {dispatch} = useContext(Context)
 
-    // const MessageFromGroup = ()=> {
-    //     return bridge.send('VKWebAppAllowMessagesFromGroup', {"group_id": '176551026', 'key': '12345'})
-    // };
-
-    const go = e => {
+    const go = () => {
 
         dispatch({
             type: 'setActivePanel',
@@ -24,11 +20,11 @@ const LastItem = (props) => {
         })
     };
 
-    const {again, redirectSiberiaHandmade, idea} = props
+    const {again, redirectSiberiaHandmade} = props
     return (
         <div className="product">
             <div className="lastProduct">
-                <img src={search} className={'img-search'} /* width={150} height={200} *//>
+                <img src={search} className={'img-search'} alt={''}/* width={150} height={200} *//>
                 <div>
                     <Button size='l' level="outline" className="btn-white" onClick={again}>Попробовать еще раз!</Button>< br/>
                     <Button size='l' level="outline" className="btn-white" onClick={redirectSiberiaHandmade}>
