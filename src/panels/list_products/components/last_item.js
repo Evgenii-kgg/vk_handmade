@@ -30,7 +30,7 @@ const LastItem = (props) => {
                     <Button size='l' level="outline" className="btn-white" onClick={redirectSiberiaHandmade}>
                         Подберите мне подарок!
                     </Button>
-                    <Button size='l' mode="secondary"  onClick={go} data_to={'idea_page'}>
+                    <Button size='l' mode="outline" className="btn-white-last"  onClick={go} data_to={'idea_page'}>
                         Предложить свою идею
                     </Button>
                 </div>

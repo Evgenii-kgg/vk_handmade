@@ -15,8 +15,8 @@ const Home = (props) => {
         dispatch({
             type: 'setActivePanel',
             payload: {
-                // activePanel: e.currentTarget.dataset.to,
-                activePanel: 'idea',
+                activePanel: e.currentTarget.dataset.to,
+                // activePanel: 'idea',
             }
         })
     };
