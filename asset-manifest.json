@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/vk_handmade/static/css/main.43eb561e.chunk.css",
-    "main.js": "/vk_handmade/static/js/main.741ffd55.chunk.js",
-    "main.js.map": "/vk_handmade/static/js/main.741ffd55.chunk.js.map",
+    "main.css": "/vk_handmade/static/css/main.55d44cc8.chunk.css",
+    "main.js": "/vk_handmade/static/js/main.7b685c77.chunk.js",
+    "main.js.map": "/vk_handmade/static/js/main.7b685c77.chunk.js.map",
     "runtime-main.js": "/vk_handmade/static/js/runtime-main.096cfa1e.js",
     "runtime-main.js.map": "/vk_handmade/static/js/runtime-main.096cfa1e.js.map",
     "static/css/2.96af7efc.chunk.css": "/vk_handmade/static/css/2.96af7efc.chunk.css",
-    "static/js/2.7cc43cac.chunk.js": "/vk_handmade/static/js/2.7cc43cac.chunk.js",
-    "static/js/2.7cc43cac.chunk.js.map": "/vk_handmade/static/js/2.7cc43cac.chunk.js.map",
+    "static/js/2.e8733138.chunk.js": "/vk_handmade/static/js/2.e8733138.chunk.js",
+    "static/js/2.e8733138.chunk.js.map": "/vk_handmade/static/js/2.e8733138.chunk.js.map",
     "index.html": "/vk_handmade/index.html",
-    "precache-manifest.7d0a6f57e7b53a4aee0be95398e69709.js": "/vk_handmade/precache-manifest.7d0a6f57e7b53a4aee0be95398e69709.js",
+    "precache-manifest.5e4c605bd7749de5a941cdf64866f6ac.js": "/vk_handmade/precache-manifest.5e4c605bd7749de5a941cdf64866f6ac.js",
     "service-worker.js": "/vk_handmade/service-worker.js",
     "static/css/2.96af7efc.chunk.css.map": "/vk_handmade/static/css/2.96af7efc.chunk.css.map",
-    "static/css/main.43eb561e.chunk.css.map": "/vk_handmade/static/css/main.43eb561e.chunk.css.map",
-    "static/js/2.7cc43cac.chunk.js.LICENSE.txt": "/vk_handmade/static/js/2.7cc43cac.chunk.js.LICENSE.txt",
+    "static/css/main.55d44cc8.chunk.css.map": "/vk_handmade/static/css/main.55d44cc8.chunk.css.map",
+    "static/js/2.e8733138.chunk.js.LICENSE.txt": "/vk_handmade/static/js/2.e8733138.chunk.js.LICENSE.txt",
     "static/media/style.css": "/vk_handmade/static/media/screen_mobile.f783b487.svg",
     "static/media/persik.png": "/vk_handmade/static/media/persik.4e1ec840.png",
     "static/media/search.svg": "/vk_handmade/static/media/search.5f8d44dd.svg"
@@ -21,8 +21,8 @@
   "entrypoints": [
     "static/js/runtime-main.096cfa1e.js",
     "static/css/2.96af7efc.chunk.css",
-    "static/js/2.7cc43cac.chunk.js",
-    "static/css/main.43eb561e.chunk.css",
-    "static/js/main.741ffd55.chunk.js"
+    "static/js/2.e8733138.chunk.js",
+    "static/css/main.55d44cc8.chunk.css",
+    "static/js/main.7b685c77.chunk.js"
   ]
 }
