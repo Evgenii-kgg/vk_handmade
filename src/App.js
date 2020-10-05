@@ -10,7 +10,7 @@ import Home from './panels/home';
 import {Context} from './context'
 import {getXLS} from "./services/xlsx";
 import PanelItem from "./panels/panel";
-import PresentIdea from "./panels/present/index";
+import PresentIdea from "./panels/idea/index";
 import ListProducts from "./panels/list_products";
 import {typeHow} from "./services/filter_products";
 import {getTypes} from "./services/types";
